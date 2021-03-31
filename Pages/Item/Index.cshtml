@@ -1,0 +1,52 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.Item.IndexModel
+@{
+}
+<div>
+    <div class="form-row">
+        <form class="form-inline" method="post">
+            <div class="form-group">
+                <input class="form-control" type="text"  asp-for="SearchString" size="47" placeholder="Suchen...">
+            </div>
+            <div class="m-3 checkbox">
+                <label><input class="m-2" type="checkbox" asp-for="OnlyAvailable">Nur Heute Verfügbare anzeigen</label>
+            </div>
+            <button type="submit" class="btn btn-secondary">Suchen</button>
+        </form>
+    </div>
+    @if (Model.ItemList != null && Model.ItemList.Count > 0)
+    {
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th>Heute vorhanden? (ja/nein)</th>
+            </tr>
+            @foreach (var item in Model.ItemList)
+            {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td><span style="white-space: pre-line">@item.Description</span></td>
+            @if (Model.IsItemBorrowed(item.Id))
+            {
+                <td>@Model.BorrowStatus[1]</td>
+            }
+            else
+            {
+                <td>@Model.BorrowStatus[0]</td>
+            }
+            <td><button><a class="nav-link text-dark" href="@ControlVariables.URL/Borrow/Create?id=@item.Id">Ausleihen</a></button></td>
+            <td><button><a class="nav-link text-dark" href="@ControlVariables.URL/Item/Overview?id=@item.Id">Übersicht</a></button></td>
+            <td><button><a class="nav-link text-dark" href="@ControlVariables.URL/Item/Edit?id=@item.Id">Bearbeiten</a></button></td>
+            <td><button><a class="nav-link text-dark" href="@ControlVariables.URL/Item/Delete?id=@item.Id">Löschen</a></button></td>
+        </tr>
+            }
+        </table>
+    }
+
+    <button class="btn-group"><a class="nav-link text-dark" asp-area="" asp-page="/Item/Create">Neues Item erstellen</a></button>
+    <h3>@Model.StatusMessage</h3>
+</div>
+

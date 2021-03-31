@@ -1,0 +1,20 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.Item.CreateModel
+@{
+}
+<div>
+    <form method="post">
+        <div class="form-group">
+            <input type="text" size="47" name="name" asp-for="Name" placeholder="Name" value="@Model.Name" required />
+
+        </div>
+        <div class="form-group">
+            <textarea type="text" rows="10" cols="50" name="description" asp-for="Description" placeholder="Beschreibung" value="@Model.Description" required></textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Item erstellen!" />
+        </div>
+    </form>
+</div>
+
+

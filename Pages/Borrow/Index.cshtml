@@ -1,0 +1,45 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.Borrow.IndexModel
+@{
+}
+<div>
+    <button><a class="nav-link text-dark" href="@ControlVariables.URL/Borrow/CalendarView">Kalendaransicht</a></button>
+    @if (Model.BorrowList != null)
+    {
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Verleiher</th>
+                <th>Ausleiher</th>
+                <th>Ausleihdatum</th>
+                <th>Rückgabedatum</th>
+                <th>Item</th>
+            </tr>
+            @foreach (var borrow in Model.BorrowList)
+            {
+                <tr>
+                    <td>@borrow.Id</td>
+                    <td>@borrow.Distributor</td>
+                    <td>@borrow.Borrower</td>
+                    <td>@borrow.BorrowDate</td>
+                    <td>@borrow.Availability</td>
+                    <td>
+                        @foreach (var item in Model.ItemList)
+                        {
+                            @if (item.Id == borrow.ItemId)
+                            {
+                                <span>@Model.InfoStringItem(item)</span>
+                                <br />
+                                <span style="white-space: pre-line">@item.Description</span>
+                            }
+                        }
+                    </td>
+                    <td><button><a class="nav-link text-dark" href="@ControlVariables.URL/Borrow/Edit?id=@borrow.Id&itemId=@borrow.ItemId">Bearbeiten</a></button></td>
+                    <td><button><a class="nav-link text-dark" href="@ControlVariables.URL/Borrow/Delete?id=@borrow.Id">Löschen</a></button></td>
+                </tr>
+            }
+        </table>
+    }
+    <button class="btn-group"><a class="nav-link text-dark" asp-area="" asp-page="/Borrow/Create">Neuen Verleih erstellen</a></button>
+    <h3>@Model.StatusMessage</h3>
+</div>

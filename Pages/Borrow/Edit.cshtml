@@ -1,0 +1,65 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.Borrow.EditModel
+@{
+}
+<div>
+    @if (Model.Item != null)
+    {
+        <table class="table table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Verleiher</th>
+                <th>Ausleiher</th>
+                <th>Ausleihdatum</th>
+                <th>Rückgabedatum</th>
+            </tr>
+            <tr>
+                <td>@Model.Borrow.Id</td>
+                <td>@Model.Borrow.Distributor</td>
+                <td>@Model.Borrow.Borrower</td>
+                <td>@Model.Borrow.BorrowDate</td>
+                <td>@Model.Borrow.Availability</td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <form method="post">
+                <div class="form-group">
+                    <input type="text" size="47" asp-for="Distributor" placeholder="Verleiher" value="@Model.Borrow.Distributor" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" size="47" asp-for="Borrower" placeholder="Ausleiher" value="@Model.Borrow.Borrower" required />
+                </div>
+                <div class="form-group">
+                    <input id="borrowDate" type="date" size="47" asp-for="BorrowDate" value="@Model.BorrowDate" max="@Model.Availability" onchange="setMinDate(event)" required />
+                </div>
+                <div class="form-group">
+                    <input id="availability" type="date" rows="10" cols="50" asp-for="Availability" value="@Model.Availability" min="@Model.BorrowDate" onchange="setMaxDate(event)" required />
+                </div>
+                <div class="form-group">
+                    <label>Wähle ein verfügbares Item aus</label>
+                    <br />
+                    <select class="form-select" asp-for="ItemId" asp-items="Model.Items" required>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Ausleih verändern!" />
+                </div>
+            </form>
+        </div>
+    }
+    <h3>@Model.StatusMessage</h3>
+</div>
+
+<script>ChannelMergerNode
+    desc = document.getElementById("desc").innerHTML
+    document.getElementById("desc-form").innerHTML = desc;
+
+    function setMinDate(e) {
+        document.getElementById("availability").min = e.target.value
+    }
+
+    function setMaxDate(e) {
+        document.getElementById("borrowDate").max = e.target.value
+    }
+</script>

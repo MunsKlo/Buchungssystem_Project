@@ -1,0 +1,109 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.Borrow.CalendarViewModel
+@{
+}
+
+<div>
+    <h2>@DateTime.Now.ToString("MMMM") @DateTime.Now.Year</h2>
+    <div>
+        <table class="table">
+            <tr>
+                <th>Mo</th>
+                <th>Tu</th>
+                <th>We</th>
+                <th>Th</th>
+                <th>Fr</th>
+                <th>Sa</th>
+                <th>Su</th>
+            </tr>
+            @foreach (var week in Model.ListOfWeeks)
+            {
+                <tr>
+                    @foreach (var day in week)
+                    {
+                        if (day >= Model.Start)
+                        {
+                            <td>@day</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+    <div>
+        <h3>Ausleihe diesen Monat</h3>
+        <table class="table table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Verleiher</th>
+                <th>Ausleiher</th>
+                <th>Ausleihdatum</th>
+                <th>Rückgabedatum</th>
+                <th>Item</th>
+            </tr>
+            @foreach (var borrow in Model.BorrowList)
+            {
+                <tr>
+                    <td>@borrow.Id</td>
+                    <td>@borrow.Distributor</td>
+                    <td>@borrow.Borrower</td>
+                    <td>@borrow.BorrowDate</td>
+                    <td>@borrow.Availability</td>
+                    <td>
+                        @foreach (var item in Model.ItemList)
+                        {
+                            @if (item.Id == borrow.ItemId)
+                            {
+                                <span>@Model.InfoStringItem(item)</span>
+                                <br />
+                                <span style="white-space: pre-line">@item.Description</span>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div>
+        <h3>Rückgaben diesen Monat</h3>
+        <table class="table table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Verleiher</th>
+                <th>Ausleiher</th>
+                <th>Ausleihdatum</th>
+                <th>Rückgabedatum</th>
+                <th>Item</th>
+            </tr>
+            @foreach (var borrow in Model.AvaiableList)
+            {
+                <tr>
+                    <td>@borrow.Id</td>
+                    <td>@borrow.Distributor</td>
+                    <td>@borrow.Borrower</td>
+                    <td>@borrow.BorrowDate</td>
+                    <td>@borrow.Availability</td>
+                    <td>
+                        @foreach (var item in Model.ItemList)
+                        {
+                            @if (item.Id == borrow.ItemId)
+                            {
+                                <span>@Model.InfoStringItem(item)</span>
+                                <br />
+                                <span style="white-space: pre-line">@item.Description</span>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    
+
+    
+    <h3>@Model.StatusMessage</h3>
+</div>

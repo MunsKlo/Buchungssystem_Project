@@ -1,0 +1,34 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.Borrow.DeleteModel
+@{
+}
+<div class="text-center">
+    <table class="table table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Verleiher</th>
+            <th>Ausleiher</th>
+            <th>Ausleihdatum</th>
+            <th>Rückgabedatum</th>
+            <th>Item</th>
+        </tr>
+        <tr>
+            <td>@Model.Borrow.Id</td>
+            <td>@Model.Borrow.Distributor</td>
+            <td>@Model.Borrow.Borrower</td>
+            <td>@Model.Borrow.BorrowDate</td>
+            <td>@Model.Borrow.Availability</td>
+            <td>@Model.Item.Description</td>
+        </tr>
+    </table>
+    <h4>Tragen Sie die Id in das Nummernfeld ein, um die Löschung zu bestätigen!</h4>
+    <form method="post">
+        <div class="form-group">
+            <input type="text" asp-for="FormId" required />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Bestätige" />
+        </div>
+    </form>
+    <h3>@Model.StatusMessage</h3>
+</div>

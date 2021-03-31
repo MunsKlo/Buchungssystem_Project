@@ -1,0 +1,47 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.Borrow.CreateModel
+@{
+}
+<div>
+    <h3>Formular für einen Verleih</h3>
+    <form method="post">
+        <div class="form-group">
+            <input id="floatingDistributor" type="text" size="47" asp-for="Distributor" placeholder="Verleiher" value="@Model.Distributor" required />
+        </div>
+        <div class="form-group">
+            <input type="text" size="47" asp-for="Borrower" placeholder="Ausleiher" value="@Model.Borrower" required />
+        </div>
+        <div class="form-group">
+            <input id="borrowDate" type="date" size="47" asp-for="BorrowDate" value="@Model.BorrowDate" max="@Model.Availability" onchange="setMinDate(event)" required />
+        </div>
+        <div class="form-group">
+            <input id="availability" type="date" rows="10" cols="50" asp-for="Availability" min="@Model.BorrowDate" onchange="setMaxDate(event)" required />
+        </div>
+        <div class="form-group">
+            <label>Wählen Sie ein verfügbares Item aus</label>
+            <br />
+            <select class="form-select" asp-for="Item" asp-items="Model.Items" required>
+                
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Ausleih erstellen!" />
+        </div>
+    </form>
+
+    @if (Model.StatusMessage.Length > 0)
+    {
+        <h3>@Model.StatusMessage</h3>
+    }
+</div>
+
+<script>
+    function setMinDate(e) {
+        document.getElementById("availability").min = e.target.value
+    }
+
+    function setMaxDate(e) {
+        document.getElementById("borrowDate").max = e.target.value
+    }
+</script>
+

@@ -1,0 +1,50 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.Item.EditModel
+@{
+}
+<div>
+    @if (Model.Item != null)
+    {
+        <table class="table table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th>Vorhanden (ja/nein)</th>
+            </tr>
+            <tr>
+
+                <td>@Model.Item.Id</td>
+                <td>@Model.Item.Name</td>
+                <td ><span id="desc" style="white-space: pre-line">@Model.Item.Description</span></td>
+                @if (Model.IsItemBorrowed(Model.Item.Id))
+                {
+                    <td>@Model.BorrowStatus[1]</td>
+                }
+                else
+                {
+                    <td>@Model.BorrowStatus[0]</td>
+                }
+            </tr>
+        </table>
+        <div class="text-center">
+            <form method="post">
+                <div class="form-group">
+                    <input type="text" asp-for="Name" size="47" value="@Model.Item.Name" />
+                </div>
+                <div class="form-group">
+                    <textarea id="desc-form" cols="50" rows="10" asp-for="Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Ändern" />
+                </div>
+            </form>
+        </div>
+    }
+    <h3>@Model.StatusMessage</h3>
+</div>
+
+<script>
+    desc = document.getElementById("desc").innerHTML
+    document.getElementById("desc-form").innerHTML = desc;
+</script>

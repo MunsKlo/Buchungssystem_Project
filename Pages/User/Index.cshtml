@@ -1,0 +1,60 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.User.IndexModel
+@{
+}
+
+<div>
+    <div class="form-row">
+        <form class="form-inline" method="post">
+            <div class="form-group">
+                <input class="form-control" type="text" asp-for="SearchString" size="47" placeholder="Suchen...">
+            </div>
+            <button type="submit" class="btn btn-secondary">Suchen</button>
+        </form>
+    </div>
+    @if (Model.UserList != null && Model.UserList.Count > 0)
+    {
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Ersteller</th>
+                <th>Admin</th>
+            </tr>
+            @foreach (var item in Model.UserList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    @if (item.IsCreator)
+                    {
+                        <td>@Model.StatusUser[0]</td>
+                    }
+                    else
+                    {
+                        <td>@Model.StatusUser[1]</td>
+                    }
+                    @if (item.IsAdmin)
+                    {
+                        <td>@Model.StatusUser[0]</td>
+                    }
+                    else
+                    {
+                        <td>@Model.StatusUser[1]</td>
+                    }
+                    @if (User.Identity.Name.Contains(item.Name))
+                    {
+                        <td class="text-dark">Das sind Sie!</td>
+                    }
+                    else
+                    {
+                        <td><button><a class="nav-link text-dark" href="@ControlVariables.URL/User/Edit?id=@item.Id">Ersteller ernennen</a></button></td>
+                        <td><button><a class="nav-link text-dark" href="@ControlVariables.URL/User/Delete?id=@item.Id">Löschen</a></button></td>
+                    }
+                </tr>
+
+            }
+        </table>
+    }
+    <h3>@Model.StatusMessage</h3>
+</div>

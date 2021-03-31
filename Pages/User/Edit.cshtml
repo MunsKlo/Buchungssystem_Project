@@ -1,0 +1,37 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.User.EditModel
+@{
+}
+
+<div class="text-center">
+    <table class="table table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Ersteller</th>
+        </tr>
+        <tr>
+            <td>@Model.User.Id</td>
+            <td>@Model.User.Name</td>
+            <td>@Model.User.IsCreator</td>
+        </tr>
+    </table>
+    @if (Model.User.IsCreator)
+    {
+        <h4>Tragen Sie die Id in das Nummernfeld ein, um den User den Ersteller-Status abzunehmen!</h4>
+    }
+    else
+    {
+        <h4>Tragen Sie die Id in das Nummernfeld ein, um den User zum Ersteller zu machen!</h4>
+    }
+
+    <form method="post">
+        <div class="form-group">
+            <input type="text" asp-for="FormId" required />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Bestätige" />
+        </div>
+    </form>
+    <h3>@Model.StatusMessage</h3>
+</div>

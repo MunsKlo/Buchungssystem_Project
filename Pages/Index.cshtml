@@ -1,0 +1,18 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div class="text-center">
+    <h1 class="display-4">Buchungssystem für Hilfsmittel des Berufsbildungswerk Sachsens</h1>
+    <br />
+    <div class="text-center">
+        <p>
+            Diese Webanwednung wurde entwickelt, um den Teilnehmern und Mitarbeitern des Berufsbildungswerk Dresden eine Übersicht
+            über alle zuverleihenden technischen Hilfsmitteln zu geben. Über diese Anwendungen werden auch Verleihe erstellt, welche das
+            Ausleihdatum und das Rückgabedatum beinhalten. Jede Person soll sich hier einen Überblick verschaffenen können, wann sie was ausleihen
+            können.
+        </p>
+    </div>
+    <h3>@Model.StatusMessage</h3>
+</div>

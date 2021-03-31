@@ -1,0 +1,42 @@
+﻿@page
+@model Buchungsystem_WindowsAuth.Pages.Item.OverviewModel
+@{
+}
+
+<div>
+    <div>
+        <table class="table table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Beschreibung</th>
+            </tr>
+            <tr>
+                <td>@Model.Item.Id</td>
+                <td>@Model.Item.Name</td>
+                <td>@Model.Item.Description</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Verleiher</th>
+                <th>Ausleiher</th>
+                <th>Ausleihdatum</th>
+                <th>Rückgabedatum</th>
+            </tr>
+            @foreach (var borrow in Model.BorrowList)
+            {
+                <tr>
+                    <td>@borrow.Id</td>
+                    <td>@borrow.Distributor</td>
+                    <td>@borrow.Borrower</td>
+                    <td>@borrow.BorrowDate</td>
+                    <td>@borrow.Availability</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
