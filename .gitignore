@@ -340,4 +340,4 @@ ASALocalRun/
 healthchecksdb
 
 # Own stuff
-important_sql_queries.sql
+.important_sql_queries.sql
