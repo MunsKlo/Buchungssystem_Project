@@ -10,7 +10,7 @@ namespace Buchungsystem_WindowsAuth
 {
     public class InterfaceDatabase
     {
-        string conn = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BuchungDB;Integrated Security=True";
+        string conn = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\GITHUB\REPOS\BUCHUNGSYSTEM_WINDOWSAUTH\BUCHUNGDB.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly string tableItems  = "Items";
         private readonly string tableBorrorws = "Borrows";
         private readonly string tableUsers = "Users";

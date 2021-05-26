@@ -21,13 +21,13 @@
                 <tr>
                     @foreach (var day in week)
                     {
-                        if (day >= Model.Start)
+                        if (day >= 1)
                         {
                             <td>@day</td>
                         }
                         else
                         {
-                            <td></td>
+                            <td>@string.Empty</td>
                         }
                     }
                 </tr>

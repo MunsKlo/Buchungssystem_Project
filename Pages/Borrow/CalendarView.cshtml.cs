@@ -15,7 +15,7 @@ namespace Buchungsystem_WindowsAuth.Pages.Borrow
         public DateTime LastDay { get; set; }
         public uint DaysInMonth { get; set; }
         public uint Start { get; set; }
-        public List<List<int>> ListOfWeeks { get; set; }
+        public List<List<uint>> ListOfWeeks { get; set; }
         public List<BorrowModel> BorrowList { get; set; }
         public List<BorrowModel> AvaiableList { get; set; }
         public List<ItemModel> ItemList { get; set; }
@@ -102,23 +102,34 @@ namespace Buchungsystem_WindowsAuth.Pages.Borrow
 
         private void FillListOfWeeks()
         {
-            ListOfWeeks = new List<List<int>>();
-            var week = new List<int>();
-            for (int i = 0; i < DaysInMonth; i++)
+            ListOfWeeks = new List<List<uint>>();
+            var week = new List<uint>();
+            var d = 0;
+            for (uint i = 0; i < DaysInMonth; i++)
             {
-                if(i % 7 == 0 && week.Count > 0)
+                if (d % 7 == 0 && week.Count > 0)
                 {
                     ListOfWeeks.Add(week);
-                    week = new List<int>();
+                    week = new List<uint>();
                     week.Add(i + 1);
+                    d++;
                 }
                 else
                 {
+                    if (i == 0)
+                    {
+                        for (uint j = 0; j < Start - 1; j++)
+                        {
+                            week.Add(0);
+                            d++;
+                        }
+                    }
                     week.Add(i + 1);
+                    d++;
                 }
             }
 
-            if(week.Count > 0)
+            if (week.Count > 0)
             {
                 ListOfWeeks.Add(week);
             }
